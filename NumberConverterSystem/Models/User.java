@@ -1,6 +1,7 @@
 package Models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +12,8 @@ public class User implements Serializable {
     public String username;
     public String password;
     public ArrayList<Conversion> currentSessionConversions;
-    public HashMap<String, ArrayList<Conversion>> conversionHistory;
+    public int undoCountInCurrentSession;
+    public HashMap<LocalDate, ArrayList<Conversion>> conversionHistory;
 
     public User(int id, String username, String password) {
         this.id = id;
@@ -19,5 +21,6 @@ public class User implements Serializable {
         this.password = password;
         this.currentSessionConversions = new ArrayList<>();
         this.conversionHistory = new HashMap<>();
+        this.undoCountInCurrentSession = 0;
     }
 }

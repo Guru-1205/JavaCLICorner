@@ -1,5 +1,8 @@
 package Controllers;
 
+import Models.Conversion;
+import Models.User;
+
 public class ConverterController {
     public static String errorMessage;
 
@@ -53,11 +56,41 @@ public class ConverterController {
         return String.format("%s.%s", integerPart, fractionalPart);
     }
 
-    public static String convertNumber(String inputValue, int sourceBase, int targetBase) {
+    public static String convertNumber(int userId, String inputValue, int sourceBase, int targetBase) {
+        Conversion c = new Conversion(inputValue, sourceBase, targetBase);
+        User user = UserController.getUserById(userId);
+        if (user == null) {
+            System.out.println("User not found !!!");
+            return "";
+        }
+        user.currentSessionConversions.add(c);
         if (isIntegerOnly(inputValue)) {
-            return convertIntegerToTargetBase(inputValue, sourceBase, targetBase);
+            String result = convertIntegerToTargetBase(inputValue, sourceBase, targetBase);
+            if (result.contains("error")) {
+                c.errorMessage = result;
+            } else {
+                c.result = result;
+            }
+            return result;
         } else {
-            return convertDecimalToTargetBase(inputValue, sourceBase, targetBase);
+            String result = convertDecimalToTargetBase(inputValue, sourceBase, targetBase);
+            if (result.contains("error")) {
+                c.errorMessage = result;
+            } else {
+                c.result = result;
+            }
+            return result;
+        }
+    }
+
+    public static boolean undoLastConversion(int userId) {
+        User currentUser = UserController.getUserById(userId);
+        if (currentUser.currentSessionConversions.size() >= 1) {
+            currentUser.currentSessionConversions.remove(currentUser.currentSessionConversions.size() - 1);
+            currentUser.undoCountInCurrentSession += 1;
+            return true;
+        } else {
+            return false;
         }
     }
 }
