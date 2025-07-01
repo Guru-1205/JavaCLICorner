@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 import Controllers.UserController;
 import Controllers.ConverterController;
+import Controllers.FileController;
+import Controllers.QuizController;
 import Controllers.StatsController;
 
 public class Main {
@@ -69,8 +71,12 @@ public class Main {
             System.out.print("\nEnter 1 for Converting a number from the source base to target base");
             System.out.print("\nEnter 2 for Conversion Stats of the current session");
             System.out.print("\nEnter 3 for Conversion Stats of the history");
-            System.out.println("\nEnter 4 for Undo the last conversion in the current session");
-            System.out.print("\n Enter 9 for Exiting the current session");
+            System.out.print("\nEnter 4 for Undo the last conversion in the current session");
+            System.out.print("\nEnter 5 for Processing a batch of conversions ( passed through file )");
+            System.out.print("\nEnter 6 for Exporting the current session conversions");
+            System.out.print("\nEnter 7 for Exporting the history of conversions");
+            System.out.print("\nEnter 8 for Quiz on Conversions");
+            System.out.print("\nEnter 9 for Exiting the current session");
 
             int option = scanner.nextInt();
             scanner.nextLine();
@@ -78,15 +84,11 @@ public class Main {
                 case 1 -> {
                     System.out.print("\nEnter the Value for Conversion: ");
                     String inputValue = scanner.nextLine();
-
                     System.out.print("\nEnter the Source Base: ");
                     int sourceBase = scanner.nextInt();
-
                     System.out.print("\nEnter the Target Base: ");
                     int targetBase = scanner.nextInt();
-
                     scanner.nextLine();
-
                     String result = ConverterController.convertNumber(userId, inputValue, sourceBase, targetBase);
                     System.out.println(result);
                 }
@@ -104,6 +106,30 @@ public class Main {
                     } else {
                         System.out.println("Undo Operation cannot be performed");
                     }
+                }
+                case 5 -> {
+                    String filePath = scanner.nextLine();
+                    FileController.batchProcessingThroughFile(userId, filePath);
+                }
+
+                case 6 -> {
+                    if (FileController.exportCurrentSessionConversions(userId)) {
+                        System.out.print("\nExporting to the File has been completed Successfully");
+                    } else {
+                        System.out.println("\nExporting Failed!!!");
+                    }
+                }
+
+                case 7 -> {
+                    if (FileController.exportHistoryConversionsByDate(userId)) {
+                        System.out.print("\nExporting to the File has been completed Successfully");
+                    } else {
+                        System.out.println("\nExporting Failed!!!");
+                    }
+                }
+
+                case 8 -> {
+                    QuizController.startQuiz();
                 }
                 case 9 -> {
                     System.out.println("Printing the Current session conversions before logging out");

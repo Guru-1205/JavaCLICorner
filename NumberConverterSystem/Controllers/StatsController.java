@@ -41,7 +41,7 @@ public class StatsController {
     public static int totalSuccessfulConversions(ArrayList<Conversion> conversions) {
         int countOfSuccessfulConversions = 0;
         for (Conversion c : conversions) {
-            if (c.result != null) {
+            if (c.result.isEmpty()) {
                 countOfSuccessfulConversions += 1;
             }
         }
@@ -51,7 +51,7 @@ public class StatsController {
     public static int totalFailedConversions(ArrayList<Conversion> conversions) {
         int countOfFailedConversions = 0;
         for (Conversion c : conversions) {
-            if (c.errorMessage != null) {
+            if (c.errorMessage.isEmpty()) {
                 countOfFailedConversions += 1;
             }
         }

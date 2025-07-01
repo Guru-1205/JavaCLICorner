@@ -15,16 +15,14 @@ public class Conversion implements Serializable {
         this.inputValue = inputValue;
         this.sourceBase = sourceBase;
         this.targetBase = targetBase;
+        this.errorMessage = "";
+        this.result = "";
     }
 
     @Override
     public String toString() {
-        return "Conversion{" +
-                "inputValue='" + inputValue + '\'' +
-                ", sourceBase=" + sourceBase +
-                ", targetBase=" + targetBase +
-                ", result='" + result + '\'' +
-                ", errorMessage='" + errorMessage + '\'' +
-                '}';
+        return String.format("Value : %s - Source Base : %d - Target Base : %d - Result : %s - Error Message - %s\n",
+                inputValue, sourceBase, targetBase, (result.isEmpty() ? "No Result" : result),
+                (errorMessage.isEmpty() ? "No Error Message" : errorMessage));
     }
 }

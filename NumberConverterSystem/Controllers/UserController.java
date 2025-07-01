@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import Models.Conversion;
@@ -30,6 +29,7 @@ public class UserController {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void loadUserList() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(USER_DATA_FILE_PATH))) {
             userList = (ArrayList<User>) ois.readObject();
@@ -78,6 +78,8 @@ public class UserController {
         ArrayList<Conversion> conversionsToday = u.conversionHistory.getOrDefault(LocalDate.now(), new ArrayList<>());
         conversionsToday.addAll(u.currentSessionConversions);
         u.conversionHistory.put(LocalDate.now(), conversionsToday);
+        u.currentSessionConversions.clear();
+        UserController.saveUserList();
     }
 
 }

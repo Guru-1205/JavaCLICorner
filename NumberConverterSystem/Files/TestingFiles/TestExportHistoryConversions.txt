@@ -1,0 +1,4 @@
+2025-07-01
+Value : 10 - Source Base : 10 - Target Base : 2 - Result : 1010 - Error Message - No Error Message
+Value : 5 - Source Base : 8 - Target Base : 2 - Result : 101 - Error Message - No Error Message
+

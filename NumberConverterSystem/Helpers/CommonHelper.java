@@ -12,7 +12,7 @@ public class CommonHelper {
             HashMap<String, Integer> hm, int top) {
 
         List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(hm.entrySet());
-        Collections.sort(list, (i1, i2) -> i1.getValue().compareTo(i2.getValue()));
+        Collections.sort(list, (i1, i2) -> i2.getValue().compareTo(i1.getValue()));
         HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> aa : list) {
             if (top-- == 0) {

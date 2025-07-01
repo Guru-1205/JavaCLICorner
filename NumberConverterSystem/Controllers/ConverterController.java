@@ -4,7 +4,6 @@ import Models.Conversion;
 import Models.User;
 
 public class ConverterController {
-    public static String errorMessage;
 
     public static boolean isIntegerOnly(String value) {
         return !value.contains(".");
@@ -13,6 +12,7 @@ public class ConverterController {
     public static String convertIntegerToTargetBase(String inputValue, int sourceBase, int targetBase) {
         int base10Value = 0;
         String targetBaseValue;
+        String errorMessage = new String();
 
         try {
             base10Value = Integer.parseInt(inputValue, sourceBase);
@@ -21,7 +21,7 @@ public class ConverterController {
         }
 
         targetBaseValue = Integer.toString(base10Value, targetBase);
-        return errorMessage == null ? targetBaseValue : errorMessage;
+        return errorMessage.isEmpty() ? targetBaseValue : errorMessage;
     }
 
     private static double convertFractionToBase10(String fractionPart, int sourceBase) {
