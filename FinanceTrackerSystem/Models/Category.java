@@ -5,6 +5,7 @@ import java.util.UUID;
 import Models.enums.CategoryType;
 
 public class Category {
+    private static final long serialVersionUID = 1L; // For serialization compatibility
     private UUID categoryId;
     private CategoryType categoryType;
     private String categoryName;

@@ -3,6 +3,7 @@ package Models;
 import java.util.UUID;
 
 public class Account {
+    private static final long serialVersionUID = 1L; // For serialization compatibility
     private String accountName;
     private double balance;
     private UUID accountId;

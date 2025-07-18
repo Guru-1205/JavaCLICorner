@@ -1,13 +1,16 @@
 package Models;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import Models.enums.UserType;
 
 public class User {
-
-    private int id;
+    private static final long serialVersionUID = 1L; // For serialization compatibility
+    private UUID id;
     private UserType type; // User type field added
     private UserProfile profile;
     private List<Account> accounts;
@@ -18,20 +21,19 @@ public class User {
     private List<Budget> budgets;
 
     // Constructor
-    public User(int id, UserType type, UserProfile profile, List<Account> accounts, List<Category> categories,
-            Map<String, List<String>> categoryMap, List<Transaction> transactions, List<Budget> budgets) {
-        this.id = id;
+    public User(UserProfile userProfile, UserType type) {
+        this.id = UUID.randomUUID(); // Generate a unique ID for the user
         this.type = type;
-        this.profile = profile;
-        this.accounts = accounts;
-        this.categories = categories;
-        this.categoryMap = categoryMap;
-        this.transactions = transactions;
-        this.budgets = budgets;
+        this.profile = userProfile;
+        this.accounts = new ArrayList<>(); // Initialize accounts list
+        this.categories = new ArrayList<>(); // Initialize categories list
+        this.categoryMap = new HashMap<>(); // Initialize category map
+        this.transactions = new ArrayList<>(); // Initialize transactions list
+        this.budgets = new ArrayList<>(); // Initialize budgets list
     }
 
     // Getters and Setters
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 

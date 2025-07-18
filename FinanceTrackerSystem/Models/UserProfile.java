@@ -3,6 +3,7 @@ package Models;
 import java.time.LocalDate;
 
 public class UserProfile {
+    private static final long serialVersionUID = 1L; // For serialization compatibility
     private String name, address, phoneNumber;
     private LocalDate dob;
 

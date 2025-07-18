@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Transaction {
+    private static final long serialVersionUID = 1L; // For serialization compatibility
     private UUID transactionId, categoryId, accountId;
     private String TransactionName;
     private LocalDate transactionDate;

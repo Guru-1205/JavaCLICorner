@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Budget {
+    private static final long serialVersionUID = 1L; // For serialization compatibility
     private UUID budgetId, categoryId;
     private String budgetName;
     private double budgetAmount;
