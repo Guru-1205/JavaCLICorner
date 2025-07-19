@@ -16,11 +16,18 @@ import Models.enums.UserType;
 public class UserController {
     public final static String USER_PROFILE_FILE = "E:\\CODE GALLATA\\OVERALL NOTES\\LONG CODING & DESIGN PATTERNS\\SAMPLE CODE\\FinanceTrackerSystem\\Files\\UsersDetails.txt";
     public static List<User> users = new ArrayList<>();
+    public static User currentUser;
 
     static {
         UserController.loadUsersDetails();
     }
 
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    // for every user details modification, we are calling this method instead we
+    // can call this method only when the user logs out
     public static boolean saveUsersDetails() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USER_PROFILE_FILE))) {
             oos.writeObject(users);
@@ -45,6 +52,7 @@ public class UserController {
         if (UserController.saveUsersDetails()) {
             System.out.println("User profile created successfully!");
             users.add(user);
+            currentUser = user; // Set the current user
             return user.getId();
         } else {
             System.out.println("Failed to create user profile.");
@@ -57,6 +65,7 @@ public class UserController {
             if (user.getProfile().getName().equals(name) && user.getProfile().getDob().equals(dob)
                     && user.getType() == type) {
                 System.out.println("Login successful for user: " + name);
+                currentUser = user; // Set the current user
                 return user.getId();
             }
         }
@@ -70,48 +79,7 @@ public class UserController {
                 return user;
             }
         }
-        return null; // User not found
+        return null;
     }
 
-    public static void viewProfile(UUID userId) {
-        User user = getUserById(userId);
-        if (user != null) {
-            System.out.println("User Profile:");
-            System.out.println(user.getProfile().toString());
-        } else {
-            System.out.println("User not found.");
-        }
-    }
-
-    public static void editProfile(UUID userId, String name, String address, String phoneNumber, LocalDate dob) {
-        User user = getUserById(userId);
-        if (user != null) {
-            UserProfile profile = user.getProfile();
-            profile.setName(name);
-            profile.setAddress(address);
-            profile.setPhoneNumber(phoneNumber);
-            profile.setDob(dob);
-            if (saveUsersDetails()) {
-                System.out.println("Profile updated successfully.");
-            } else {
-                System.out.println("Failed to update profile.");
-            }
-        } else {
-            System.out.println("User not found.");
-        }
-    }
-
-    public static void deleteProfile(UUID userId) {
-        User user = getUserById(userId);
-        if (user != null) {
-            users.remove(user);
-            if (saveUsersDetails()) {
-                System.out.println("Profile deleted successfully.");
-            } else {
-                System.out.println("Failed to delete profile.");
-            }
-        } else {
-            System.out.println("User not found.");
-        }
-    }
 }

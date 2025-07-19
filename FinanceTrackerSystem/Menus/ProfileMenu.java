@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 import Controllers.UserController;
+import Controllers.UserProfileController;
 
 public class ProfileMenu {
     public static Scanner scanner = new Scanner(System.in);
@@ -19,24 +20,19 @@ public class ProfileMenu {
             int userOption = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
             switch (userOption) {
-                case 1 -> UserController.viewProfile(userId);
+                case 1 -> UserProfileController.viewProfile();
                 case 2 -> {
-                    if (UserController.getUserById(userId) == null) {
-                        System.out.println("User not found.");
-                        return;
-                    } else {
-                        System.out.print("\nEnter your new name: ");
-                        String name = scanner.nextLine();
-                        System.out.print("\nEnter your new address: ");
-                        String address = scanner.nextLine();
-                        System.out.print("\nEnter your new phone number: ");
-                        String phoneNumber = scanner.nextLine();
-                        System.out.print("\nEnter your new date of birth (YYYY-MM-DD): ");
-                        LocalDate dob = LocalDate.parse(scanner.nextLine());
-                        UserController.editProfile(userId, name, address, phoneNumber, dob);
-                    }
+                    System.out.print("\nEnter your new name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("\nEnter your new address: ");
+                    String address = scanner.nextLine();
+                    System.out.print("\nEnter your new phone number: ");
+                    String phoneNumber = scanner.nextLine();
+                    System.out.print("\nEnter your new date of birth (YYYY-MM-DD): ");
+                    LocalDate dob = LocalDate.parse(scanner.nextLine());
+                    UserProfileController.editProfile(name, address, phoneNumber, dob);
                 }
-                case 3 -> UserController.deleteProfile(userId);
+                case 3 -> UserProfileController.deleteProfile();
                 case 4 -> {
                     System.out.println("Returning to Main Menu.");
                     return;

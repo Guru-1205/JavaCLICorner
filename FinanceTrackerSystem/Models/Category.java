@@ -10,15 +10,16 @@ public class Category {
     private CategoryType categoryType;
     private String categoryName;
     private boolean isSubCategory;
-    private String parentCategoryName;
+    private Category parentCategory;
 
     // Parameterized constructor
-    public Category(CategoryType categoryType, String categoryName, boolean isSubCategory, String parentCategoryName) {
+    public Category(CategoryType categoryType, String categoryName, boolean isSubCategory,
+            Category parentCategory) {
         this.categoryId = UUID.randomUUID();
         this.categoryType = categoryType;
         this.categoryName = categoryName;
         this.isSubCategory = isSubCategory;
-        this.parentCategoryName = parentCategoryName;
+        this.parentCategory = parentCategory;
     }
 
     // Getter for categoryId
@@ -56,14 +57,14 @@ public class Category {
         this.isSubCategory = isSubCategory;
     }
 
-    // Getter for parentCategoryName
-    public String getParentCategoryName() {
-        return parentCategoryName;
+    // Getter for parentCategory
+    public Category getparentCategory() {
+        return parentCategory;
     }
 
-    // Setter for parentCategoryName
-    public void setParentCategoryName(String parentCategoryName) {
-        this.parentCategoryName = parentCategoryName;
+    // Setter for parentCategory
+    public void setparentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
     }
 
     // Method to display category information
@@ -73,7 +74,7 @@ public class Category {
                 "Category Type: " + categoryType + "\n" +
                 "Category Name: " + categoryName + "\n" +
                 "Is Sub-Category: " + isSubCategory + "\n" +
-                "Parent Category Name: " + parentCategoryName;
+                "Parent Category Name: " + parentCategory.getCategoryName();
     }
 
 }
