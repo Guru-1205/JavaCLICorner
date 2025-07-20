@@ -1,11 +1,12 @@
 package Models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Budget {
+public class Budget implements Serializable {
     private static final long serialVersionUID = 1L; // For serialization compatibility
     private UUID budgetId, categoryId;
     private String budgetName;

@@ -1,5 +1,6 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.UUID;
 
 import Models.enums.UserType;
 
-public class User {
+public class User implements Serializable {
     private static final long serialVersionUID = 1L; // For serialization compatibility
     private UUID id;
     private UserType type; // User type field added

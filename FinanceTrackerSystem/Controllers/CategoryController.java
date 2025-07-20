@@ -4,6 +4,8 @@ import Models.enums.CategoryType;
 import Models.Category;
 import static Controllers.UserController.currentUser;
 
+import java.util.UUID;
+
 public class CategoryController {
     public static boolean addCategory(CategoryType categoryType, String categoryName) {
         if (currentUser != null) {
@@ -60,6 +62,29 @@ public class CategoryController {
         }
     }
 
+    public static boolean editCategory(String categoryName, String newCategoryName, CategoryType newCategoryType) {
+        if (currentUser != null) {
+            for (Category category : currentUser.getCategories()) {
+                if (category.getCategoryName().equals(categoryName)) {
+                    category.setCategoryName(newCategoryName);
+                    category.setCategoryType(newCategoryType);
+                    if (UserController.saveUsersDetails()) {
+                        System.out.println("Category edited successfully.");
+                        return true;
+                    } else {
+                        System.out.println("Failed to save user details after editing category.");
+                        return false;
+                    }
+                }
+            }
+            System.out.println("Category not found.");
+            return false;
+        } else {
+            System.out.println("User not found.");
+            return false;
+        }
+    }
+
     public static boolean deleteCategory(String categoryName) {
         if (currentUser != null) {
             for (Category category : currentUser.getCategories()) {
@@ -91,6 +116,53 @@ public class CategoryController {
         } else {
             System.out.println("User not found.");
             return false;
+        }
+    }
+
+    public static UUID getCategoryIdByName(String categoryName) {
+        if (currentUser != null) {
+            for (Category category : currentUser.getCategories()) {
+                if (category.getCategoryName().equals(categoryName)) {
+                    return category.getCategoryId();
+                }
+            }
+            System.out.println("Category not found.");
+            return null;
+        } else {
+            System.out.println("User not found.");
+            return null;
+        }
+    }
+
+    // method to get the type of category by its name
+    public static CategoryType getCategoryTypeByName(String categoryName) {
+        if (currentUser != null) {
+            for (Category category : currentUser.getCategories()) {
+                if (category.getCategoryName().equals(categoryName)) {
+                    return category.getCategoryType();
+                }
+            }
+            System.out.println("Category not found.");
+            return null;
+        } else {
+            System.out.println("User not found.");
+            return null;
+        }
+    }
+
+    // method to get the category type by itss id
+    public static CategoryType getCategoryTypeById(UUID categoryId) {
+        if (currentUser != null) {
+            for (Category category : currentUser.getCategories()) {
+                if (category.getCategoryId().equals(categoryId)) {
+                    return category.getCategoryType();
+                }
+            }
+            System.out.println("Category not found.");
+            return null;
+        } else {
+            System.out.println("User not found.");
+            return null;
         }
     }
 }

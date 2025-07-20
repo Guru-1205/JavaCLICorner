@@ -49,9 +49,9 @@ public class UserController {
     public static UUID createUserProfile(String name, String address, String phoneNumber, LocalDate dob,
             UserType type) {
         User user = new User(new UserProfile(name, address, phoneNumber, dob), type);
+        users.add(user);
         if (UserController.saveUsersDetails()) {
             System.out.println("User profile created successfully!");
-            users.add(user);
             currentUser = user; // Set the current user
             return user.getId();
         } else {

@@ -128,4 +128,19 @@ public class AccountController {
         }
     }
 
+    public static UUID getAccountIdByName(String accountName) {
+        if (currentUser != null) {
+            for (Account account : currentUser.getAccounts()) {
+                if (account.getAccountName().equals(accountName)) {
+                    return account.getAccountId();
+                }
+            }
+            System.out.println("Account not found.");
+            return null;
+        } else {
+            System.out.println("User not found.");
+            return null;
+        }
+    }
+
 }

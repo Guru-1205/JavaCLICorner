@@ -1,9 +1,10 @@
 package Models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Transaction {
+public class Transaction implements Serializable {
     private static final long serialVersionUID = 1L; // For serialization compatibility
     private UUID transactionId, categoryId, accountId;
     private String TransactionName;

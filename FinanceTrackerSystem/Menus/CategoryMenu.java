@@ -2,7 +2,6 @@ package Menus;
 
 import java.util.Scanner;
 import java.util.UUID;
-import java.util.Locale.Category;
 
 import Controllers.CategoryController;
 import Models.enums.CategoryType;
@@ -46,6 +45,35 @@ public class CategoryMenu {
                     }
                 }
                 case 2 -> CategoryController.viewCategories();
+                case 3 -> {
+                    System.out.print("\nEnter category name to edit: ");
+                    String categoryName = scanner.nextLine();
+                    System.out.print("\nEnter new category name: ");
+                    String newCategoryName = scanner.nextLine();
+                    System.out.print("\nEnter new category type (INCOME/EXPENSE): ");
+                    String newCategoryTypeInput = scanner.nextLine().toUpperCase();
+                    CategoryType newCategoryType;
+                    try {
+                        newCategoryType = CategoryType.valueOf(newCategoryTypeInput);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid category type. Please enter INCOME or EXPENSE.");
+                        continue;
+                    }
+                    if (CategoryController.editCategory(categoryName, newCategoryName, newCategoryType)) {
+                        System.out.println("Category edited successfully.");
+                    } else {
+                        System.out.println("Failed to edit category.");
+                    }
+                }
+                case 4 -> {
+                    System.out.print("\nEnter category name to delete: ");
+                    String categoryName = scanner.nextLine();
+                    if (CategoryController.deleteCategory(categoryName)) {
+                        System.out.println("Category deleted successfully.");
+                    } else {
+                        System.out.println("Failed to delete category.");
+                    }
+                }
             }
         }
     }

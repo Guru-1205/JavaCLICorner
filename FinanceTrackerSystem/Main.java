@@ -1,13 +1,12 @@
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.UUID;
-import java.util.Locale.Category;
 
 import Controllers.UserController;
 import Menus.AccountMenu;
 import Menus.CategoryMenu;
 import Menus.ProfileMenu;
-import Models.Account;
+import Menus.TransactionMenu;
 import Models.enums.UserType;
 
 public class Main {
@@ -115,12 +114,14 @@ public class Main {
             System.out.print("\n1. Manage Profile");
             System.out.print("\n2. Manage Accounts");
             System.out.print("\n3. Manage Categories");
+            System.out.print("\n4. Manage Transactions");
             int userOption = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
             switch (userOption) {
                 case 1 -> ProfileMenu.menu(userId);
                 case 2 -> AccountMenu.menu(userId);
                 case 3 -> CategoryMenu.menu(userId);
+                case 4 -> TransactionMenu.menu(userId);
                 case 7 -> {
                     System.out.println("The User is logged out.");
                     UserController.currentUser = null; // Clear the current user

@@ -1,8 +1,9 @@
 package Models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class UserProfile {
+public class UserProfile implements Serializable {
     private static final long serialVersionUID = 1L; // For serialization compatibility
     private String name, address, phoneNumber;
     private LocalDate dob;

@@ -1,10 +1,11 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import Models.enums.CategoryType;
 
-public class Category {
+public class Category implements Serializable {
     private static final long serialVersionUID = 1L; // For serialization compatibility
     private UUID categoryId;
     private CategoryType categoryType;
@@ -74,7 +75,8 @@ public class Category {
                 "Category Type: " + categoryType + "\n" +
                 "Category Name: " + categoryName + "\n" +
                 "Is Sub-Category: " + isSubCategory + "\n" +
-                "Parent Category Name: " + parentCategory.getCategoryName();
+                "Parent Category Name: " + (parentCategory == null ? "No parent category found"
+                        : parentCategory.getCategoryName());
     }
 
 }
