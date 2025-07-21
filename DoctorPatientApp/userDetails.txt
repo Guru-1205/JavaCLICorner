@@ -1,0 +1,4 @@
+doctor1,doctor1,DOCTOR
+patient1,patient1,PATIENT
+guru12,guru12,DOCTOR
+gc2,gc2,DOCTOR
