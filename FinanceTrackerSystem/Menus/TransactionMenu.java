@@ -76,6 +76,10 @@ public class TransactionMenu {
                         System.out.println("Failed to delete transaction. Please check the ID and try again.");
                     }
                 }
+                case 5 -> {
+                    System.out.println("Returning to main menu...");
+                    return;
+                }
             }
         }
     }

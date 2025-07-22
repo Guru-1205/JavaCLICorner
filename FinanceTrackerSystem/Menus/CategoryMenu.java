@@ -74,6 +74,10 @@ public class CategoryMenu {
                         System.out.println("Failed to delete category.");
                     }
                 }
+                case 5 -> {
+                    System.out.println("Returning to main menu...");
+                    return;
+                }
             }
         }
     }

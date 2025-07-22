@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import Controllers.UserController;
 import Menus.AccountMenu;
+import Menus.BudgetMenu;
 import Menus.CategoryMenu;
 import Menus.ProfileMenu;
 import Menus.TransactionMenu;
@@ -115,6 +116,8 @@ public class Main {
             System.out.print("\n2. Manage Accounts");
             System.out.print("\n3. Manage Categories");
             System.out.print("\n4. Manage Transactions");
+            System.out.print("\n5. Manage Budgets");
+            System.out.print("\n6. Logout");
             int userOption = scanner.nextInt();
             scanner.nextLine(); // Consume newline character
             switch (userOption) {
@@ -122,7 +125,8 @@ public class Main {
                 case 2 -> AccountMenu.menu(userId);
                 case 3 -> CategoryMenu.menu(userId);
                 case 4 -> TransactionMenu.menu(userId);
-                case 7 -> {
+                case 5 -> BudgetMenu.menu(userId);
+                case 6 -> {
                     System.out.println("The User is logged out.");
                     UserController.currentUser = null; // Clear the current user
                 }

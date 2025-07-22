@@ -28,6 +28,7 @@ public class TransactionController {
                     }
                 }
             }
+            BudgetController.calculateBudgetProgressByTransactions();
             if (UserController.saveUsersDetails()) {
                 System.out.println("Transaction added successfully!");
                 return true;
