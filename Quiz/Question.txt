@@ -1,0 +1,14 @@
+User Management
+The application allows user registration and login for different roles: Admin, Teacher, and Student. Each user must provide a username, password, and role during registration. The login system authenticates users based on their credentials and grants access to role-specific functionalities.
+
+Quiz Creation (Admin)
+Admins can create quizzes by adding multiple questions, each with four options and a correct answer. The quiz data is stored in a file to ensure persistence. This feature allows easy management of quiz content and ensures that quizzes can be retrieved and used later.
+
+Quiz Scheduling (Teacher)
+Teachers can view all created quizzes and schedule them for specific departments and academic years. This ensures that only students from the designated department and year can attempt the quiz. The scheduling details are stored persistently in a file for future reference.
+
+Quiz Attempt & Evaluation (Student)
+Students can attempt quizzes assigned to their department and year. The quiz is displayed interactively, allowing students to select answers for each question. After submission, the system evaluates the responses and calculates the total marks obtained.
+
+Marks Assignment & Performance Tracking
+Teachers can assign and review student scores for quizzes. The marks are stored along with the quiz data, allowing teachers to track student performance over time. This feature helps in assessing student progress and maintaining quiz records.

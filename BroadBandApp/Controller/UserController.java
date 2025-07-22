@@ -42,7 +42,7 @@ public class UserController {
 
     public static int LoginUser(String uname, String upass) {
         if (AoU == null) {
-            System.out.println("intha code");
+            // System.out.println("intha code");
             AoU = new ArrayList<User>();
             return -1;
         }

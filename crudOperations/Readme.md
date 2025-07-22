@@ -9,6 +9,7 @@ Welcome to the Recipe Management System repository! This Java CLI application al
 ## Features
 
 - **User Management**:
+
   - 📝 Register new users.
   - 🔑 Login existing users.
 
