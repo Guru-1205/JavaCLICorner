@@ -6,9 +6,39 @@ import java.util.UUID;
 
 import Controllers.TransactionController;
 
+/**
+ * The TransactionMenu class provides a console-based menu for managing
+ * transactions
+ * in the Finance Tracker System. It allows users to add, view, edit, and delete
+ * transactions.
+ *
+ * <p>
+ * Typical Usage:
+ * Call {@link #menu(UUID)} to display the transaction management menu for a
+ * specific user.
+ * </p>
+ *
+ * <p>
+ * Dependencies:
+ * <ul>
+ * <li>Controllers.TransactionController</li>
+ * <li>java.util.Scanner</li>
+ * <li>java.util.UUID</li>
+ * <li>java.time.LocalDate</li>
+ * </ul>
+ * </p>
+ */
 public class TransactionMenu {
+    /** Scanner for reading user input from the console. */
     public static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Displays the transaction management menu for the specified user.
+     * Provides options to add, view, edit, delete transactions, or return to the
+     * main menu.
+     *
+     * @param userId UUID of the user for whom the menu is displayed.
+     */
     public static void menu(UUID userId) {
         System.out.print("\nTransaction Management Menu:");
         while (true) {
@@ -21,7 +51,7 @@ public class TransactionMenu {
             scanner.nextLine(); // Consume newline character
             switch (userOption) {
                 case 1 -> {
-                    // title, amount,account,category,date,description
+                    // Add Transaction
                     System.out.print("\nEnter transaction title: ");
                     String title = scanner.nextLine();
                     System.out.print("\nEnter transaction amount: ");
@@ -46,6 +76,7 @@ public class TransactionMenu {
                 }
                 case 2 -> TransactionController.viewTransactions();
                 case 3 -> {
+                    // Edit Transaction
                     TransactionController.viewTransactions();
                     System.out.print("\nEnter transaction ID to edit: ");
                     String transactionId = scanner.nextLine();
@@ -66,7 +97,7 @@ public class TransactionMenu {
                             newDescription);
                 }
                 case 4 -> {
-                    // Assuming transactions are stored in a list, we can display them first
+                    // Delete Transaction
                     TransactionController.viewTransactions();
                     System.out.print("\nEnter transaction ID to delete: ");
                     String transactionId = scanner.nextLine();
@@ -77,6 +108,7 @@ public class TransactionMenu {
                     }
                 }
                 case 5 -> {
+                    // Back to Main Menu
                     System.out.println("Returning to main menu...");
                     return;
                 }

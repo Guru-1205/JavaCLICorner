@@ -4,12 +4,41 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.UUID;
 
-import Controllers.UserController;
 import Controllers.UserProfileController;
 
+/**
+ * The ProfileMenu class provides a console-based menu for managing the profile
+ * of the currently logged-in user in the Finance Tracker System. It allows
+ * users
+ * to view, edit, and delete their profile.
+ *
+ * <p>
+ * Typical Usage:
+ * Call {@link #menu(UUID)} to display the profile management menu for a
+ * specific user.
+ * </p>
+ *
+ * <p>
+ * Dependencies:
+ * <ul>
+ * <li>Controllers.UserProfileController</li>
+ * <li>java.util.Scanner</li>
+ * <li>java.util.UUID</li>
+ * <li>java.time.LocalDate</li>
+ * </ul>
+ * </p>
+ */
 public class ProfileMenu {
+    /** Scanner for reading user input from the console. */
     public static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Displays the profile management menu for the specified user.
+     * Provides options to view, edit, delete the profile, or return to the main
+     * menu.
+     *
+     * @param userId UUID of the user for whom the menu is displayed.
+     */
     public static void menu(UUID userId) {
         System.out.print("\nProfile Management Menu:");
         while (true) {

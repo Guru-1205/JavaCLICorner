@@ -6,9 +6,39 @@ import java.util.UUID;
 import Controllers.CategoryController;
 import Models.enums.CategoryType;
 
+/**
+ * The CategoryMenu class provides a console-based menu for managing categories
+ * and subcategories in the Finance Tracker System. It allows users to add,
+ * view,
+ * edit, and delete categories and subcategories.
+ *
+ * <p>
+ * Typical Usage:
+ * Call {@link #menu(UUID)} to display the category management menu for a
+ * specific user.
+ * </p>
+ *
+ * <p>
+ * Dependencies:
+ * <ul>
+ * <li>Controllers.CategoryController</li>
+ * <li>Models.enums.CategoryType</li>
+ * <li>java.util.Scanner</li>
+ * <li>java.util.UUID</li>
+ * </ul>
+ * </p>
+ */
 public class CategoryMenu {
+    /** Scanner for reading user input from the console. */
     public static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Displays the category management menu for the specified user.
+     * Provides options to add, view, edit, delete categories or subcategories, or
+     * return to the main menu.
+     *
+     * @param userId UUID of the user for whom the menu is displayed.
+     */
     public static void menu(UUID userId) {
         System.out.print("\nCategory Management Menu:");
         while (true) {
@@ -21,6 +51,7 @@ public class CategoryMenu {
             scanner.nextLine(); // Consume newline character
             switch (userOption) {
                 case 1 -> {
+                    // Add Category or Subcategory
                     System.out.print("\nEnter category name: ");
                     String categoryName = scanner.nextLine();
                     System.out.print("\nEnter category type (INCOME/EXPENSE): ");
@@ -44,8 +75,12 @@ public class CategoryMenu {
                         System.out.println("Category added successfully: " + categoryName);
                     }
                 }
-                case 2 -> CategoryController.viewCategories();
+                case 2 -> {
+                    // View Categories
+                    CategoryController.viewCategories();
+                }
                 case 3 -> {
+                    // Edit Category
                     System.out.print("\nEnter category name to edit: ");
                     String categoryName = scanner.nextLine();
                     System.out.print("\nEnter new category name: ");
@@ -66,6 +101,7 @@ public class CategoryMenu {
                     }
                 }
                 case 4 -> {
+                    // Delete Category
                     System.out.print("\nEnter category name to delete: ");
                     String categoryName = scanner.nextLine();
                     if (CategoryController.deleteCategory(categoryName)) {
@@ -75,6 +111,7 @@ public class CategoryMenu {
                     }
                 }
                 case 5 -> {
+                    // Back to Main Menu
                     System.out.println("Returning to main menu...");
                     return;
                 }

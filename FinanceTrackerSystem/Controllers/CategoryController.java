@@ -6,7 +6,81 @@ import static Controllers.UserController.currentUser;
 
 import java.util.UUID;
 
+/**
+ * Provides static methods to manage categories and subcategories for the
+ * currently logged-in user
+ * in the Finance Tracker System. This controller supports adding, viewing,
+ * editing, deleting categories
+ * and subcategories, and retrieving category information by name or ID.
+ *
+ * <h2>Responsibilities</h2>
+ * <ul>
+ * <li>Add new main categories and subcategories for the current user.</li>
+ * <li>Display all categories (main and subcategories) belonging to the current
+ * user.</li>
+ * <li>Edit category details, including name and type.</li>
+ * <li>Delete categories, updating subcategory relationships as needed.</li>
+ * <li>Retrieve category UUIDs and types by name or ID for cross-referencing in
+ * transactions and budgets.</li>
+ * </ul>
+ *
+ * <h2>Usage Example</h2>
+ * 
+ * <pre>
+ * CategoryController.addCategory(CategoryType.EXPENSE, "Groceries");
+ * CategoryController.addSubCategory(CategoryType.EXPENSE, "Vegetables", "Groceries");
+ * CategoryController.viewCategories();
+ * CategoryController.editCategory("Groceries", "Food", CategoryType.EXPENSE);
+ * CategoryController.deleteCategory("Food");
+ * UUID id = CategoryController.getCategoryIdByName("Vegetables");
+ * CategoryType type = CategoryController.getCategoryTypeById(id);
+ * </pre>
+ *
+ * <h2>Dependencies</h2>
+ * <ul>
+ * <li>{@link Models.Category} - The category model being managed.</li>
+ * <li>{@link Models.enums.CategoryType} - Enum for category type (INCOME,
+ * EXPENSE).</li>
+ * <li>{@link Controllers.UserController} - For accessing {@code currentUser}
+ * and saving user details.</li>
+ * </ul>
+ *
+ * <h2>Thread Safety</h2>
+ * <p>
+ * This class is <b>not thread-safe</b>. All operations assume single-threaded
+ * access to {@code currentUser}.
+ * If used in a multi-threaded environment, external synchronization is
+ * required.
+ * </p>
+ *
+ * <h2>Validation</h2>
+ * <p>
+ * This class performs basic validation (e.g., existence of category, parent
+ * category, and user).
+ * Further validation (such as name uniqueness or input format) should be
+ * handled externally.
+ * </p>
+ *
+ * <h2>Extensibility</h2>
+ * <p>
+ * Additional category operations (such as color, icon, or audit logging) can be
+ * added as needed.
+ * </p>
+ *
+ * @author Finance Tracker System
+ * @version 1.0
+ */
 public class CategoryController {
+
+    /**
+     * Adds a new main category for the current user.
+     * The category is added to the user's category list and persisted.
+     *
+     * @param categoryType The type of the category (e.g., INCOME, EXPENSE).
+     * @param categoryName The name of the new category.
+     * @return true if the category is added and user details are saved
+     *         successfully; false otherwise.
+     */
     public static boolean addCategory(CategoryType categoryType, String categoryName) {
         if (currentUser != null) {
             Category newCategory = new Category(categoryType, categoryName, false, null);
@@ -24,6 +98,17 @@ public class CategoryController {
         }
     }
 
+    /**
+     * Adds a new subcategory under a specified parent category for the current
+     * user.
+     * The subcategory is linked to its parent and persisted.
+     *
+     * @param categoryType       The type of the subcategory.
+     * @param categoryName       The name of the new subcategory.
+     * @param parentCategoryName The name of the parent category.
+     * @return true if the subcategory is added and user details are saved
+     *         successfully; false otherwise.
+     */
     public static boolean addSubCategory(CategoryType categoryType, String categoryName, String parentCategoryName) {
         if (currentUser != null) {
             for (Category category : currentUser.getCategories()) {
@@ -47,6 +132,12 @@ public class CategoryController {
         }
     }
 
+    /**
+     * Displays all categories belonging to the current user.
+     * Prints "No categories found." if there are no categories.
+     * Each category is displayed using its {@link Category#toString()}
+     * representation.
+     */
     public static void viewCategories() {
         if (currentUser != null) {
             if (currentUser.getCategories().isEmpty()) {
@@ -62,6 +153,17 @@ public class CategoryController {
         }
     }
 
+    /**
+     * Edits the name and type of an existing category.
+     * If the category is found, updates its name and type, then persists user
+     * details.
+     *
+     * @param categoryName    The name of the category to edit.
+     * @param newCategoryName The new name for the category.
+     * @param newCategoryType The new type for the category.
+     * @return true if the category is updated and user details are saved
+     *         successfully; false otherwise.
+     */
     public static boolean editCategory(String categoryName, String newCategoryName, CategoryType newCategoryType) {
         if (currentUser != null) {
             for (Category category : currentUser.getCategories()) {
@@ -85,12 +187,23 @@ public class CategoryController {
         }
     }
 
+    /**
+     * Deletes a category with the specified name from the current user's category
+     * list.
+     * If the category is a main category, its subcategories will have their parent
+     * set to null
+     * and will be marked as main categories. The category is then removed and user
+     * details persisted.
+     *
+     * @param categoryName The name of the category to delete.
+     * @return true if the category is deleted and user details are saved
+     *         successfully; false otherwise.
+     */
     public static boolean deleteCategory(String categoryName) {
         if (currentUser != null) {
             for (Category category : currentUser.getCategories()) {
                 if (category.getCategoryName().equals(categoryName)) {
-                    // if it's a main category, then look through all subcategories and change their
-                    // parent to null and then remove the main category
+                    // If it's a main category, update subcategories
                     if (!category.isSubCategory()) {
                         for (Category subCategory : currentUser.getCategories()) {
                             if (subCategory.getparentCategory() != null
@@ -119,6 +232,13 @@ public class CategoryController {
         }
     }
 
+    /**
+     * Retrieves the unique ID (UUID) of a category by its name.
+     * Useful for cross-referencing categories in transactions and budgets.
+     *
+     * @param categoryName The name of the category.
+     * @return UUID of the category if found; null otherwise.
+     */
     public static UUID getCategoryIdByName(String categoryName) {
         if (currentUser != null) {
             for (Category category : currentUser.getCategories()) {
@@ -134,7 +254,13 @@ public class CategoryController {
         }
     }
 
-    // method to get the type of category by its name
+    /**
+     * Retrieves the type of a category by its name.
+     * Useful for determining transaction or budget logic based on category type.
+     *
+     * @param categoryName The name of the category.
+     * @return CategoryType of the category if found; null otherwise.
+     */
     public static CategoryType getCategoryTypeByName(String categoryName) {
         if (currentUser != null) {
             for (Category category : currentUser.getCategories()) {
@@ -150,7 +276,13 @@ public class CategoryController {
         }
     }
 
-    // method to get the category type by itss id
+    /**
+     * Retrieves the type of a category by its unique ID.
+     * Useful for determining transaction or budget logic based on category type.
+     *
+     * @param categoryId The UUID of the category.
+     * @return CategoryType of the category if found; null otherwise.
+     */
     public static CategoryType getCategoryTypeById(UUID categoryId) {
         if (currentUser != null) {
             for (Category category : currentUser.getCategories()) {

@@ -5,9 +5,39 @@ import java.util.UUID;
 
 import Controllers.AccountController;
 
+/**
+ * The AccountMenu class provides a console-based menu for managing user
+ * accounts
+ * in the Finance Tracker System. It allows users to add, view, edit, delete
+ * accounts,
+ * and transfer funds between accounts.
+ *
+ * <p>
+ * Typical Usage:
+ * Call {@link #menu(UUID)} to display the account management menu for a
+ * specific user.
+ * </p>
+ *
+ * <p>
+ * Dependencies:
+ * <ul>
+ * <li>Controllers.AccountController</li>
+ * <li>java.util.Scanner</li>
+ * <li>java.util.UUID</li>
+ * </ul>
+ * </p>
+ */
 public class AccountMenu {
+    /** Scanner for reading user input from the console. */
     public static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Displays the account management menu for the specified user.
+     * Provides options to add, view, edit, delete accounts, transfer funds, or
+     * return to the main menu.
+     *
+     * @param userId UUID of the user for whom the menu is displayed.
+     */
     public static void menu(UUID userId) {
         System.out.print("\nAccount Management Menu:");
         while (true) {
@@ -21,6 +51,7 @@ public class AccountMenu {
             scanner.nextLine(); // Consume newline character
             switch (userOption) {
                 case 1 -> {
+                    // Add Account
                     System.out.print("\nEnter account name: ");
                     String accountName = scanner.nextLine();
                     System.out.print("\nEnter initial balance: ");
@@ -28,8 +59,12 @@ public class AccountMenu {
                     scanner.nextLine(); // Consume newline character
                     AccountController.addAccount(accountName, initialBalance);
                 }
-                case 2 -> AccountController.viewAccounts();
+                case 2 -> {
+                    // View Accounts
+                    AccountController.viewAccounts();
+                }
                 case 3 -> {
+                    // Edit Account
                     AccountController.viewAccounts();
                     System.out.print("\nEnter account name to edit: ");
                     String accountName = scanner.nextLine();
@@ -41,6 +76,7 @@ public class AccountMenu {
                     AccountController.editAccount(accountName, newAccountName, newBalance);
                 }
                 case 4 -> {
+                    // Delete Account
                     AccountController.viewAccounts();
                     String accountName = scanner.nextLine();
                     if (AccountController.deleteAccount(accountName)) {
@@ -50,6 +86,7 @@ public class AccountMenu {
                     }
                 }
                 case 5 -> {
+                    // Transfer Funds
                     AccountController.viewAccounts();
                     System.out.print("\nEnter source account name: ");
                     String sourceAccountName = scanner.nextLine();
@@ -65,6 +102,7 @@ public class AccountMenu {
                     }
                 }
                 case 6 -> {
+                    // Back to Main Menu
                     System.out.println("Returning to Main Menu.");
                     return;
                 }

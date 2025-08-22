@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.UUID;
@@ -10,14 +11,30 @@ import Menus.ProfileMenu;
 import Menus.TransactionMenu;
 import Models.enums.UserType;
 
+/**
+ * Main class for the Budget Management System CLI application.
+ * Handles user registration, login, and navigation through user/admin features.
+ */
 public class Main {
 
+    /**
+     * Scanner instance for reading user input from the console.
+     */
     public static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Entry point for the application.
+     * 
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         showMainMenu();
     }
 
+    /**
+     * Displays the main menu and handles user selection for registration, login, or
+     * exit.
+     */
     public static void showMainMenu() {
         System.out.print("Welcome to the Budget Management System!\n");
         System.out.print("\n1. Create User Profile");
@@ -37,6 +54,10 @@ public class Main {
         }
     }
 
+    /**
+     * Handles user registration by collecting user details and creating a profile.
+     * Shows relevant feature menus based on user type.
+     */
     public static void registerMenu() {
         System.out.print("\nEnter your name: ");
         String name = scanner.nextLine();
@@ -73,6 +94,10 @@ public class Main {
         }
     }
 
+    /**
+     * Handles user login by verifying credentials and showing relevant feature
+     * menus.
+     */
     public static void loginMenu() {
         System.out.print("\nEnter your user name :");
         String userName = scanner.nextLine();
@@ -105,10 +130,22 @@ public class Main {
         }
     }
 
+    /**
+     * Displays the admin features menu for the given user.
+     * 
+     * @param userId UUID of the logged-in admin user.
+     */
     public static void showAdminFeaturesMenu(UUID userId) {
-
+        // Admin features menu implementation goes here.
     }
 
+    /**
+     * Displays the regular user features menu for the given user.
+     * Allows navigation to profile, accounts, categories, transactions, budgets,
+     * and logout.
+     * 
+     * @param userId UUID of the logged-in regular user.
+     */
     public static void showUserFeaturesMenu(UUID userId) {
         System.out.print("\n User Features Menu:");
         while (true) {
@@ -129,6 +166,7 @@ public class Main {
                 case 6 -> {
                     System.out.println("The User is logged out.");
                     UserController.currentUser = null; // Clear the current user
+                    System.exit(0); // Exit the application
                 }
             }
         }
