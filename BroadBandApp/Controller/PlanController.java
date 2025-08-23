@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-import Models.User;
+
+import FinanceTrackerSystem.Models.User;
 
 public class PlanController {
     // plan -> name,id,price ,duration,speed limit

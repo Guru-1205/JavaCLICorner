@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"FinanceTrackerSystem"},{"l":"FinanceTrackerSystem.Controllers"},{"l":"FinanceTrackerSystem.Menus"},{"l":"FinanceTrackerSystem.Models"},{"l":"FinanceTrackerSystem.Models.enums"}];updateSearchResults();

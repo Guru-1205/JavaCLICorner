@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 import Controller.PlanController;
 import Controller.UserController;
-import Models.User;
+import FinanceTrackerSystem.Models.User;
 
 public class Main {
     public static void main(String[] args) {

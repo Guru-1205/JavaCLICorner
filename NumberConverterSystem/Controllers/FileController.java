@@ -8,8 +8,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 
+import FinanceTrackerSystem.Controllers.UserController;
+import FinanceTrackerSystem.Models.User;
 import Models.Conversion;
-import Models.User;
 
 public class FileController {
 

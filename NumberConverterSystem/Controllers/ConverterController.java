@@ -1,7 +1,8 @@
 package Controllers;
 
+import FinanceTrackerSystem.Controllers.UserController;
+import FinanceTrackerSystem.Models.User;
 import Models.Conversion;
-import Models.User;
 
 public class ConverterController {
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import Models.User;
+import FinanceTrackerSystem.Models.User;
 
 public class ServiceController {
     // service -> sid,sname,scategory,slocation,smobile,savail;

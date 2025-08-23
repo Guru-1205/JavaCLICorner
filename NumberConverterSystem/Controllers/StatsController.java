@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.User;
 import Models.Conversion;
 
 import java.time.LocalDate;
@@ -8,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import FinanceTrackerSystem.Controllers.UserController;
+import FinanceTrackerSystem.Models.User;
 import Helpers.CommonHelper;
 
 public class StatsController {
