@@ -44,7 +44,7 @@ import java.util.UUID;
  * This class is <b>not thread-safe</b>. If instances are shared between
  * threads, external synchronization is required.
  * </p>
- *
+ * ī
  * <h2>Serialization</h2>
  * <p>
  * Implements {@link Serializable} for persistent storage and retrieval of
